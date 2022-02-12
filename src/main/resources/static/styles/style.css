@@ -1,0 +1,23 @@
+/* Global Styles */
+body {
+    background: #e2e2e2 !important;
+}
+
+.bg-primary {
+    background: #009688 !important;
+}
+
+/* Home Page */
+.banner {
+    width: 100%;
+    height: 91vh;
+    background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(../images/banner.jpg);
+    background-size: cover;
+    color: white;
+}
+
+/* Signup Page */
+.my-card {
+    padding: 20px;
+    background: #ffffff;
+}
