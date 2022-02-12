@@ -1,6 +1,9 @@
 package com.smart.smartcontactmanager.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +13,20 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @NotBlank(message = "Name field is required")
+    @Size(min = 2, max = 40, message = "Name length should be between 2 - 40 characters")
     private String name;
+
     @Column(unique = true)
+    @NotBlank(message = "Email field is required")
+    @Email(regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
     private String email;
+
+    @NotBlank(message = "Password field is required")
+    @Size(min = 3, max = 20, message = "Password length should be between 3 - 20 characters")
     private String password;
+
     private String imageUrl;
     @Column(length = 500)
     private String about;

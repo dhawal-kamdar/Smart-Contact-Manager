@@ -27,24 +27,27 @@
 
                     <h1 class="text-center">Register Here</h1>
 
-                    <form th:action="@{/register-user}" method="post" th:object="${user}">
+                    <form novalidate th:action="@{/register-user}" method="post" th:object="${user}">
 
                         <!-- Name -->
                         <div class="form-group">
                             <label for="name-field">Name</label>
-                            <input type="text" class="form-control" id="name-field" placeholder="Enter name" required name="name" th:value="${user.name}">
+                            <input type="text" class="form-control" id="name-field" placeholder="Enter name" required name="name" th:value="${user.name}" th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}">
+                            <div class="invalid-feedback" th:each="e : ${#fields.errors('name')}" th:text="${e}"></div>
                         </div>
 
                         <!-- Email -->
                         <div class="form-group mt-1">
                             <label for="email-field">Email</label>
-                            <input type="email" class="form-control" id="email-field" placeholder="Enter email" required name="email" th:value="${user.email}">
+                            <input type="email" class="form-control" id="email-field" placeholder="Enter email" required name="email" th:value="${user.email}" th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}">
+                            <div class="invalid-feedback" th:each="e : ${#fields.errors('email')}" th:text="${e}"></div>
                         </div>
 
                         <!-- Password -->
                         <div class="form-group mt-1">
                             <label for="password-field">Password</label>
-                            <input type="password" class="form-control" id="password-field" placeholder="Enter password" required name="password">
+                            <input type="password" class="form-control" id="password-field" placeholder="Enter password" required name="password" th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}">
+                            <div class="invalid-feedback" th:each="e : ${#fields.errors('password')}" th:text="${e}"></div>
                         </div>
 
                         <!-- About -->
