@@ -7,6 +7,10 @@ body {
     background: #009688 !important;
 }
 
+.bg-primary-text {
+    color: #009688;
+}
+
 /* Home Page */
 .banner {
     width: 100%;
@@ -20,4 +24,24 @@ body {
 .my-card {
     padding: 20px;
     background: #ffffff;
+}
+
+/* Login Page */
+#login .container #login-row #login-column #login-box {
+  margin-top: 40px;
+  max-width: 600px;
+  height: 420px;
+  border: 1px solid #9C9C9C;
+  background-color: #ffffff;
+}
+#login .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}
+
+.links {
+    align-items: baseline;
+    justify-content: space-between;
 }
