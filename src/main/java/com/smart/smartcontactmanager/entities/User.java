@@ -24,7 +24,7 @@ public class User {
     private String email;
 
     @NotBlank(message = "Password field is required")
-    @Size(min = 3, max = 20, message = "Password length should be between 3 - 20 characters")
+    @Size(min = 3, max = 80, message = "Password length should be between 3 - 80 characters")
     private String password;
 
     private String imageUrl;
