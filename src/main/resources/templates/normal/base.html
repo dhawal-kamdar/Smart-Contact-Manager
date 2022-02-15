@@ -61,6 +61,17 @@
     <!-- Content -->
     <div class="content">
         <i class="fas fa-bars m-3" onclick="toggleSidebar()"></i>
+
+        <!-- Add Contact Success Alert -->
+        <div class="container" th:if="${session.message}">
+            <div class="alert text-center" role="alert" th:classappend="${'alert-' + session.message.type}">
+                <span th:text="${session.message.content}"></span>
+            </div>
+
+            <!-- Remove session variable -->
+            <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+        </div>
+
         <div th:replace="${content}"></div>
     </div>
     <!--  End of Content -->

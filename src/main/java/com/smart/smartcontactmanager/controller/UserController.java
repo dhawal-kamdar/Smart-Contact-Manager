@@ -3,6 +3,7 @@ package com.smart.smartcontactmanager.controller;
 import com.smart.smartcontactmanager.dao.UserRepository;
 import com.smart.smartcontactmanager.entities.Contact;
 import com.smart.smartcontactmanager.entities.User;
+import com.smart.smartcontactmanager.helper.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -52,7 +54,10 @@ public class UserController {
     }
 
     @PostMapping("/process-contact")
-    public String processContact(@ModelAttribute Contact contact, @RequestParam("profileImage") MultipartFile file, Principal principal) {
+    public String processContact(@ModelAttribute Contact contact,
+                                 @RequestParam("profileImage") MultipartFile file,
+                                 Principal principal,
+                                 HttpSession session) {
         try {
             String username = principal.getName();
             User user = this.userRepository.getUserByUsername(username);
@@ -73,8 +78,12 @@ public class UserController {
 
             this.userRepository.save(user);
 
+            session.setAttribute("message", new Message("Contact added successfully", "success"));
+
             System.out.println("CONTACT ADDED TO DATABASE");
         } catch (Exception e) {
+            session.setAttribute("message", new Message("Something went wrong, Try again", "danger"));
+
             System.out.println("ERROR: " + e.getMessage());
             e.printStackTrace();
         }
