@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+<section>
+    <div class="card ms-4 me-4">
+        <div class="card-body">
+            <h1 class="text-center">Your Contacts</h1>
+
+            <!-- Table -->
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="c : ${contacts}">
+                        <th scope="row" th:text="${c.cId}"></th>
+                        <td th:text="${c.name}"></td>
+                        <td th:text="${c.email}"></td>
+                        <td th:text="${c.phone}"></td>
+                        <td>
+                            <button class="btn btn-primary btn-sm"><i class="fa-solid fa-pencil"></i></button>
+                            <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <!-- Previous -->
+                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled' : ''">
+                        <a class="page-link" href="#" th:href="@{'/user/view-contacts/' + ${currentPage-1}}">
+                            Previous
+                        </a>
+                    </li>
+
+                    <!-- Numbers -->
+                    <li class="page-item" th:each="i : ${#numbers.sequence(1,totalPages)}" th:classappend="${currentPage == i-1 ? 'active' : ''}">
+                        <a class="page-link" href="#" th:href="@{'/user/view-contacts/' + ${i-1}}">
+                            <span th:text="${i}"></span>
+                        </a>
+                    </li>
+
+                    <!-- Next -->
+                    <li class="page-item" th:classappend="${currentPage == totalPages-1} ? 'disabled' : ''">
+                        <a class="page-link" href="#" th:href="@{'/user/view-contacts/' + ${currentPage+1}}">
+                            Next
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+</body>
+</html>
