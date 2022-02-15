@@ -26,10 +26,24 @@
                 </thead>
                 <tbody>
                     <tr th:each="c : ${contacts}">
+                        <!-- Id -->
                         <th scope="row" th:text="${c.cId}"></th>
-                        <td th:text="${c.name}"></td>
+
+                        <!-- Photo and Name -->
+                        <td>
+                            <img src="" th:src="@{'/images/' + ${c.imageUrl}}" alt="profile photo" class="profile-picture me-2" />
+                            <a href="#" th:href="@{'/user/contact/' + ${c.cId}}" style="text-decoration: none; color: black;">
+                                <span th:text="${c.name}"></span>
+                            </a>
+                        </td>
+
+                        <!-- Email -->
                         <td th:text="${c.email}"></td>
+
+                        <!-- Phone -->
                         <td th:text="${c.phone}"></td>
+
+                        <!-- Actions Buttons -->
                         <td>
                             <button class="btn btn-primary btn-sm"><i class="fa-solid fa-pencil"></i></button>
                             <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>

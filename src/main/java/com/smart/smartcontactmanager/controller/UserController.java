@@ -72,6 +72,7 @@ public class UserController {
             // Profile Image Processing
             if(file.isEmpty()) {
                 System.out.println("IMAGE FILE IS EMPTY - NOT UPLOADED");
+                contact.setImageUrl("default.png");
             } else {
                 contact.setImageUrl(contact.getPhone() + "." + StringUtils.getFilenameExtension(file.getOriginalFilename()));
                 File folder = new ClassPathResource("static/images").getFile();
