@@ -4,13 +4,18 @@ import com.smart.smartcontactmanager.dao.UserRepository;
 import com.smart.smartcontactmanager.entities.Contact;
 import com.smart.smartcontactmanager.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 
 @Controller
@@ -47,16 +52,33 @@ public class UserController {
     }
 
     @PostMapping("/process-contact")
-    public String processContact(@ModelAttribute Contact contact, Principal principal) {
-        String username = principal.getName();
-        User user = this.userRepository.getUserByUsername(username);
+    public String processContact(@ModelAttribute Contact contact, @RequestParam("profileImage") MultipartFile file, Principal principal) {
+        try {
+            String username = principal.getName();
+            User user = this.userRepository.getUserByUsername(username);
 
-        contact.setUser(user);
-        user.getContacts().add(contact);
+            // Profile Image Processing
+            if(file.isEmpty()) {
+                System.out.println("IMAGE FILE IS EMPTY - NOT UPLOADED");
+            } else {
+                contact.setImageUrl(contact.getPhone() + "." + StringUtils.getFilenameExtension(file.getOriginalFilename()));
+                File folder = new ClassPathResource("static/images").getFile();
+                Path targetPath = Paths.get(folder.getAbsolutePath() + File.separator + contact.getPhone() + "." + StringUtils.getFilenameExtension(file.getOriginalFilename()));
+                Files.copy(file.getInputStream(), targetPath, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("IMAGE IS UPLOADED");
+            }
 
-        this.userRepository.save(user);
+            contact.setUser(user);
+            user.getContacts().add(contact);
 
-        System.out.println("CONTACT ADDED TO DATABASE");
+            this.userRepository.save(user);
+
+            System.out.println("CONTACT ADDED TO DATABASE");
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e.getMessage());
+            e.printStackTrace();
+        }
+
         return "normal/add-contact";
     }
     
