@@ -44,8 +44,10 @@
                         <td th:text="${c.phone}"></td>
 
                         <!-- Actions Buttons -->
-                        <td>
-                            <button class="btn btn-primary btn-sm"><i class="fa-solid fa-pencil"></i></button>
+                        <td class="d-flex">
+                            <form th:action="@{'/user/update/' + ${c.cId}}" method="post">
+                                <button type="submit" class="btn btn-primary btn-sm me-1"><i class="fa-solid fa-pencil"></i></button>
+                            </form>
                             <a href="#" th:onclick="|deleteContact(${c.cId})|" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>

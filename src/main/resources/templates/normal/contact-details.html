@@ -58,8 +58,11 @@
 <!--                </div>-->
 
                 <!-- Actions Buttons -->
-                <div class="container">
-                    <button class="btn btn-primary"><i class="fa-solid fa-pencil"></i> Edit</button>
+                <div class="container d-flex justify-content-center">
+                    <form th:action="@{'/user/update/' + ${contact.cId}}" method="post">
+                        <button type="submit" class="btn btn-primary me-3"><i class="fa-solid fa-pencil"></i> Edit</button>
+<!--                        <button type="submit" class="btn btn-primary btn-sm me-1"><i class="fa-solid fa-pencil"></i></button>-->
+                    </form>
                     <button th:onclick="|deleteContact(${contact.cId})|" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
                 </div>
             </div>
