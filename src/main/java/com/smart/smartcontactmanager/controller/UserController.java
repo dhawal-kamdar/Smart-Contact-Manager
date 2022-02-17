@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -133,6 +134,37 @@ public class UserController {
         }
 
         return "normal/contact-details";
+    }
+
+    @GetMapping("/delete/{cId}")
+    public String deleteContact(@PathVariable("cId") Integer cId, Model model, Principal principal, HttpSession session) throws IOException {
+        Optional<Contact> contactOptional = this.contactRepository.findById(cId);
+        Contact contact = contactOptional.get();
+
+        // Check if user have access to the contact
+        String username = principal.getName();
+        User user = this.userRepository.getUserByUsername(username);
+
+        if(user.getId() == contact.getUser().getId()) {
+            // Delete Profile Picture
+            if(!contact.getImageUrl().equals("default.png")) {
+                File folder = new ClassPathResource("static/images").getFile();
+                Path targetPath = Paths.get(folder.getAbsolutePath() + File.separator + contact.getImageUrl());
+                Files.delete(targetPath);
+                System.out.println("Deleted Profile Picture:" + contact.getImageUrl());
+            }
+
+            // Delete Contact from Database
+            contact.setUser(null);
+            user.getContacts().removeIf(c -> c.getcId() == contact.getcId());
+            this.contactRepository.delete(contact);
+
+            session.setAttribute("message", new Message("Contact deleted successfully", "success"));
+        } else {
+            session.setAttribute("message", new Message("You don't have access to this contact", "danger"));
+        }
+
+        return "redirect:/user/view-contacts/0";
     }
 
 }

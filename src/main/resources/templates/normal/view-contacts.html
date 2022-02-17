@@ -46,7 +46,7 @@
                         <!-- Actions Buttons -->
                         <td>
                             <button class="btn btn-primary btn-sm"><i class="fa-solid fa-pencil"></i></button>
-                            <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+                            <a href="#" th:onclick="|deleteContact(${c.cId})|" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                 </tbody>
