@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+<section>
+    <div class="container">
+        <div class="card">
+            <div class="card-body text-center">
+                <!-- Profile Picture -->
+                <img src="" th:src="@{'/images/' + ${user.imageUrl}}" alt="profile photo" class="profile-picture mb-2" style="width: 150px; height: 150px;" />
+
+                <!-- Name and Nick Name -->
+                <h4>
+                    <span th:text="${user.name}"></span>
+                </h4>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Field</th>
+                        <th scope="col">Values</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td scope="row">Id</td>
+                        <td scope="col"><span th:text="${user.id}"></span></td>
+                    </tr>
+                    <tr>
+                        <td scope="row">Email</td>
+                        <td scope="col"><span th:text="${user.email}"></span></td>
+                    </tr>
+                    <tr>
+                        <td scope="row">Role</td>
+                        <td scope="col"><span th:text="${user.role}"></span></td>
+                    </tr>
+                    <tr>
+                        <td scope="row">Enabled</td>
+                        <td scope="col"><span th:text="${user.enabled}"></span></td>
+                    </tr>
+                    <tr>
+                        <td scope="row">About</td>
+                        <td scope="col"><span th:utext="${user.about}"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
