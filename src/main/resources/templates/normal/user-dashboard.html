@@ -9,7 +9,19 @@
 </head>
 <body>
 <section>
-    <h1>This is Private User Dashboard Page</h1>
+    <div class="container">
+        <div class="card">
+            <div class="card-body text-center my-3">
+                <!-- Logo -->
+                <img src="" th:src="@{'/images/contact-logo.png'}" alt="profile photo" class="profile-picture mb-3" style="width: 150px; height: 150px;" />
+
+                <!-- Text -->
+                <h1>Start adding your contacts on cloud</h1>
+
+                <a th:href="@{/user/add-contact}" class="btn btn-primary text-uppercase mt-3">Add New Contact</a>
+            </div>
+        </div>
+    </div>
 </section>
 </body>
 </html>
