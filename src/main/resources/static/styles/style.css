@@ -53,3 +53,17 @@ body {
     object-fit: cover;
     border-radius: 50%;
 }
+
+/* View Contact - Search */
+.search-container {
+	position: relative;
+}
+
+.search-result {
+	position: absolute;
+	background: #ffffff;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid gray;
+	display: none;
+}
