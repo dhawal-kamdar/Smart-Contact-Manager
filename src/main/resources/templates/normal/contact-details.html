@@ -21,14 +21,15 @@
                     <span th:text="'(' + ${contact.nickName} + ')'"></span>
                 </h4>
 
-                <table class="table table-striped">
-                    <thead>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
                         <tr>
                             <th scope="col">Field</th>
                             <th scope="col">Values</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <tr>
                             <td scope="row">Id</td>
                             <td scope="col"><span th:text="${contact.cId}"></span></td>
@@ -49,8 +50,9 @@
                             <td scope="row">Description</td>
                             <td scope="col"><span th:utext="${contact.description}"></span></td>
                         </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
 
                 <!-- Description -->
 <!--                <div class="description">-->

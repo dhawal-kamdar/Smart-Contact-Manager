@@ -67,3 +67,9 @@ body {
 	border: 1px solid gray;
 	display: none;
 }
+
+/* User Dashboard */
+.active {
+    background: #009688 !important;
+    color: #ffffff !important;
+}

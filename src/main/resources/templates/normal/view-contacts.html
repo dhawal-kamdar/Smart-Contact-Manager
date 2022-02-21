@@ -22,17 +22,18 @@
             </div>
 
             <!-- Table -->
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     <tr th:each="c : ${contacts}">
                         <!-- Id -->
                         <th scope="row" th:text="${c.cId}"></th>
@@ -59,8 +60,9 @@
                             <a href="#" th:onclick="|deleteContact(${c.cId})|" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
 
             <!-- Pagination -->
             <nav aria-label="Page navigation example">
@@ -89,6 +91,13 @@
             </nav>
         </div>
     </div>
+
+    <script>
+        $(document).ready(() => {
+            $(".item").removeClass("active");
+            $("#view-contact-link").addClass("active");
+        });
+    </script>
 </section>
 </body>
 </html>
